@@ -1,238 +1,264 @@
-/* Reset and base styles */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Fonts */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;600;700&display=swap');
+
+/* Base Styles */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  font-family: 'Courier New', monospace;
-  background-color: #0a0a0a;
-  color: #00ff00;
-  line-height: 1.6;
-  overflow-x: auto;
+html, body {
+  height: 100%;
+  font-family: 'JetBrains Mono', 'Courier New', monospace;
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+  color: #e0e0e0;
+  overflow-x: hidden;
 }
 
-/* Terminal container */
-.terminal {
+#root {
   min-height: 100vh;
-  background-color: #0a0a0a;
-  color: #00ff00;
-  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
-  font-size: 14px;
-  line-height: 1.5;
-}
-
-/* Terminal header */
-.terminal-header {
-  background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
-  padding: 12px 20px;
-  border-bottom: 1px solid #333;
   display: flex;
   align-items: center;
-  gap: 15px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Terminal Container */
+.terminal {
+  @apply w-full max-w-6xl mx-auto;
+  background: rgba(15, 15, 35, 0.95);
+  border-radius: 20px;
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  overflow: hidden;
+  min-height: 90vh;
+  animation: fadeIn 1s ease-out;
+}
+
+/* Terminal Header */
+.terminal-header {
+  @apply flex items-center justify-between px-6 py-4;
+  background: linear-gradient(135deg, 
+    rgba(26, 26, 46, 0.9) 0%, 
+    rgba(42, 42, 74, 0.9) 50%,
+    rgba(58, 58, 102, 0.9) 100%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .terminal-buttons {
-  display: flex;
-  gap: 8px;
+  @apply flex gap-3;
 }
 
 .btn {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.btn.red {
-  background-color: #ff5f57;
-}
-
-.btn.yellow {
-  background-color: #ffbd2e;
-}
-
-.btn.green {
-  background-color: #28ca42;
-}
-
-.terminal-title {
-  color: #00ff00;
-  font-weight: bold;
-  text-shadow: 0 0 5px rgba(0, 255, 0, 0.5);
-}
-
-/* Terminal body */
-.terminal-body {
-  padding: 20px;
-  background-color: #0a0a0a;
-  min-height: calc(100vh - 60px);
-}
-
-/* Prompt lines */
-.prompt-line {
-  margin: 15px 0;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.prompt {
-  color: #00ff00;
-  font-weight: bold;
-  text-shadow: 0 0 3px rgba(0, 255, 0, 0.3);
-}
-
-.command {
-  color: #ffffff;
-  font-style: italic;
-}
-
-/* Sections */
-.section {
-  margin: 25px 0;
-  border-left: 3px solid #00ff00;
-  padding-left: 15px;
-  background: rgba(0, 255, 0, 0.02);
-}
-
-.section-title {
-  color: #00ff00;
-  font-size: 18px;
-  font-weight: bold;
-  margin-bottom: 15px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  text-shadow: 0 0 8px rgba(0, 255, 0, 0.6);
-}
-
-.content {
-  color: #cccccc;
-  margin-left: 20px;
-}
-
-.content p {
-  margin-bottom: 10px;
-  line-height: 1.6;
-}
-
-/* Skills styling */
-.skill-category {
-  margin-bottom: 20px;
-}
-
-.skill-category h3 {
-  color: #00ff00;
-  font-size: 16px;
-  margin-bottom: 8px;
-  font-weight: bold;
-}
-
-.skill-category ul {
-  list-style: none;
-  margin-left: 20px;
-}
-
-.skill-category li {
-  color: #ffffff;
-  margin-bottom: 4px;
-  transition: color 0.3s ease;
-}
-
-.skill-category li:hover {
-  color: #00ff00;
-  text-shadow: 0 0 3px rgba(0, 255, 0, 0.5);
-}
-
-/* Job and project styling */
-.job, .project, .education {
-  margin-bottom: 25px;
-  padding: 15px;
-  background: rgba(0, 255, 0, 0.03);
-  border-radius: 5px;
-  border: 1px solid rgba(0, 255, 0, 0.1);
-}
-
-.job h3, .project h3, .education h3 {
-  color: #00ff00;
-  font-size: 16px;
-  margin-bottom: 8px;
-  font-weight: bold;
-}
-
-.company, .institution, .tech-stack {
-  color: #888888;
-  font-style: italic;
-  margin-bottom: 10px;
-}
-
-.tech-stack {
-  color: #ffaa00;
-  font-weight: bold;
-}
-
-.job ul, .project ul, .education ul {
-  list-style: none;
-  margin-left: 20px;
-}
-
-.job li, .project li, .education li {
-  color: #ffffff;
-  margin-bottom: 6px;
-  line-height: 1.5;
-}
-
-/* Contact section */
-.contact {
-  background: rgba(0, 255, 0, 0.05);
-  border: 2px solid rgba(0, 255, 0, 0.2);
-  border-radius: 8px;
-  padding: 20px;
-}
-
-.contact-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 15px;
-  margin-left: 20px;
-}
-
-.contact-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.contact-item .label {
-  color: #00ff00;
-  font-weight: bold;
-  min-width: 80px;
-}
-
-.contact-item .value {
-  color: #ffffff;
-  word-break: break-all;
-}
-
-.contact-item .value:hover {
-  color: #00ff00;
-  text-shadow: 0 0 3px rgba(0, 255, 0, 0.5);
+  @apply w-4 h-4 rounded-full transition-all duration-300;
   cursor: pointer;
 }
 
-/* Blinking cursor */
-.blinking {
+.btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px currentColor;
+}
+
+.btn.red {
+  background: linear-gradient(45deg, #ff6b6b, #ff5252);
+}
+
+.btn.yellow {
+  background: linear-gradient(45deg, #ffd93d, #ffb300);
+}
+
+.btn.green {
+  background: linear-gradient(45deg, #6bcf7f, #4caf50);
+}
+
+.terminal-title {
+  @apply text-lg font-semibold;
+  color: #64ffda;
+  text-shadow: 0 0 10px rgba(100, 255, 218, 0.5);
+}
+
+/* Avatar */
+.avatar {
+  @apply w-12 h-12 rounded-full border-2 border-cyan-400;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   display: flex;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Terminal Body */
+.terminal-body {
+  @apply px-6 py-4 space-y-6;
+  background: rgba(0, 0, 0, 0.2);
+  min-height: calc(90vh - 80px);
+}
+
+/* Welcome Section */
+.welcome-section {
+  @apply text-center space-y-4 mb-8;
+}
+
+.ascii-art {
+  @apply text-xs md:text-sm;
+  color: #64ffda;
+  text-shadow: 0 0 10px rgba(100, 255, 218, 0.3);
+  font-family: 'Courier New', monospace;
+  line-height: 1;
+  overflow-x: auto;
+}
+
+.welcome-text {
+  @apply text-2xl md:text-3xl font-bold;
+  background: linear-gradient(135deg, #64ffda 0%, #b794f6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.welcome-subtitle {
+  @apply text-lg md:text-xl;
+  color: #a0aec0;
+}
+
+.help-text {
+  @apply text-sm;
+  color: #718096;
+}
+
+/* Command Buttons */
+.command-buttons {
+  @apply flex flex-wrap gap-3 justify-center mb-8;
+}
+
+.cmd-btn {
+  @apply px-4 py-2 rounded-lg font-medium transition-all duration-300;
+  background: linear-gradient(135deg, rgba(100, 255, 218, 0.1) 0%, rgba(183, 148, 246, 0.1) 100%);
+  border: 1px solid rgba(100, 255, 218, 0.3);
+  color: #64ffda;
+  cursor: pointer;
+}
+
+.cmd-btn:hover {
+  background: linear-gradient(135deg, rgba(100, 255, 218, 0.2) 0%, rgba(183, 148, 246, 0.2) 100%);
+  border-color: #64ffda;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(100, 255, 218, 0.2);
+}
+
+.cmd-btn:active {
+  transform: translateY(0);
+}
+
+/* Command History */
+.command-history {
+  @apply space-y-2 mb-6;
+}
+
+.history-line {
+  @apply font-mono text-sm;
+  color: #e2e8f0;
+  white-space: pre-wrap;
+}
+
+/* Output Section */
+.output-section {
+  @apply mb-6;
+}
+
+.typewriter {
+  @apply font-mono text-sm leading-relaxed;
+  color: #e2e8f0;
+  white-space: pre-wrap;
+  animation: typewriter 1s steps(40) 1s both;
+}
+
+/* Input Line */
+.input-line {
+  @apply flex items-center gap-2 mb-6;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid rgba(100, 255, 218, 0.2);
+}
+
+.prompt {
+  @apply text-sm font-medium;
+  color: #64ffda;
+  text-shadow: 0 0 5px rgba(100, 255, 218, 0.3);
+  white-space: nowrap;
+}
+
+.command-input {
+  @apply flex-1 bg-transparent border-none outline-none text-sm font-mono;
+  color: #e2e8f0;
+}
+
+.command-input::placeholder {
+  color: #718096;
 }
 
 .cursor {
-  color: #00ff00;
-  font-weight: bold;
+  @apply text-sm font-bold;
+  color: #64ffda;
   animation: blink 1s infinite;
+}
+
+/* Social Links */
+.social-links {
+  @apply flex flex-wrap gap-4 justify-center;
+}
+
+.social-link {
+  @apply flex items-center gap-2 px-4 py-2 rounded-lg transition-all duration-300 no-underline;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.1) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #e2e8f0;
+  text-decoration: none;
+}
+
+.social-link:hover {
+  background: linear-gradient(135deg, rgba(100, 255, 218, 0.1) 0%, rgba(183, 148, 246, 0.1) 100%);
+  border-color: rgba(100, 255, 218, 0.5);
+  color: #64ffda;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(100, 255, 218, 0.1);
+}
+
+.icon {
+  @apply text-lg;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
 }
 
 @keyframes blink {
@@ -244,118 +270,108 @@ body {
   }
 }
 
-/* Lists */
-ul {
-  list-style: none;
-}
-
-li {
-  margin-bottom: 8px;
-  line-height: 1.5;
-}
-
-/* Responsive design */
+/* Responsive Design */
 @media (max-width: 768px) {
-  .terminal-body {
-    padding: 15px;
-  }
-  
-  .section-title {
-    font-size: 16px;
+  #root {
+    padding: 0.5rem;
   }
   
   .terminal {
-    font-size: 13px;
+    border-radius: 15px;
+    min-height: 95vh;
   }
   
-  .contact-grid {
-    grid-template-columns: 1fr;
+  .terminal-header {
+    @apply px-4 py-3;
   }
   
-  .contact-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
+  .terminal-title {
+    @apply text-base;
+  }
+  
+  .terminal-body {
+    @apply px-4 py-3;
+  }
+  
+  .ascii-art {
+    @apply text-xs;
+  }
+  
+  .welcome-text {
+    @apply text-xl;
+  }
+  
+  .welcome-subtitle {
+    @apply text-base;
+  }
+  
+  .cmd-btn {
+    @apply px-3 py-2 text-sm;
+  }
+  
+  .social-links {
+    @apply gap-2;
+  }
+  
+  .social-link {
+    @apply px-3 py-2 text-sm;
   }
 }
 
 @media (max-width: 480px) {
-  .terminal-header {
-    padding: 10px 15px;
-  }
-  
-  .terminal-body {
-    padding: 10px;
-  }
-  
-  .section {
-    padding-left: 10px;
-  }
-  
-  .content {
-    margin-left: 10px;
-  }
-  
   .terminal {
-    font-size: 12px;
+    border-radius: 10px;
+    min-height: 98vh;
+  }
+  
+  .ascii-art {
+    font-size: 0.6rem;
+  }
+  
+  .welcome-text {
+    @apply text-lg;
+  }
+  
+  .cmd-btn {
+    @apply px-2 py-1 text-xs;
+  }
+  
+  .social-link {
+    @apply px-2 py-1 text-xs;
   }
 }
 
-/* Scrollbar styling */
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #1a1a1a;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #00ff00;
+  background: linear-gradient(135deg, #64ffda, #b794f6);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 255, 0, 0.8);
+  background: linear-gradient(135deg, #4fd1c7, #9f7aea);
 }
 
-/* Selection styling */
+/* Selection */
 ::selection {
-  background-color: rgba(0, 255, 0, 0.3);
+  background: rgba(100, 255, 218, 0.3);
   color: #ffffff;
 }
 
-/* Text effects */
-.section-title, .prompt {
-  text-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+/* Focus styles */
+.command-input:focus {
+  outline: none;
 }
 
-/* Hover effects */
-.job:hover, .project:hover, .education:hover {
-  background: rgba(0, 255, 0, 0.05);
-  border-color: rgba(0, 255, 0, 0.2);
-  transition: all 0.3s ease;
-}
-
-/* Print styles */
-@media print {
-  body {
-    background-color: white;
-    color: black;
-  }
-  
-  .terminal {
-    background-color: white;
-    color: black;
-  }
-  
-  .terminal-header {
-    background: white;
-    border-bottom: 1px solid black;
-  }
-  
-  .prompt, .section-title {
-    color: black;
-    text-shadow: none;
-  }
+.input-line:focus-within {
+  border-color: #64ffda;
+  box-shadow: 0 0 0 3px rgba(100, 255, 218, 0.1);
 }
