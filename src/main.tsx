@@ -23,9 +23,7 @@ const App = () => {
         <section className="section">
           <h2 className="section-title"># PROFESSIONAL SUMMARY</h2>
           <div className="content">
-            <p>Passionate Full Stack Developer with expertise in modern web technologies.</p>
-            <p>Dedicated to creating efficient, scalable, and user-friendly applications.</p>
-            <p>Strong background in both frontend and backend development.</p>
+            <p>Experienced Systems Administrator and Full Stack Developer with strong expertise in system administration, cloud technologies, and modern web development. Proven track record at Microsoft UHRS with focus on system reliability, performance optimization, and technical problem-solving. Passionate about building efficient, scalable solutions and maintaining robust infrastructure.</p>
           </div>
         </section>
         
@@ -38,27 +36,32 @@ const App = () => {
           <h2 className="section-title"># CORE SKILLS</h2>
           <div className="content">
             <div className="skill-category">
-              <h3>→ Frontend:</h3>
+              → System Administration:
               <ul>
-                <li>• React.js, Next.js, TypeScript</li>
-                <li>• HTML5, CSS3, Tailwind CSS</li>
-                <li>• JavaScript (ES6+), Redux</li>
+                • Linux/Unix System Administration
+                • Windows Server Management
+                • Network Configuration & Troubleshooting
+                • System Monitoring & Performance Tuning
+                • Cloud Infrastructure (AWS, Azure)
               </ul>
             </div>
             <div className="skill-category">
-              <h3>→ Backend:</h3>
+              → Frontend Development:
               <ul>
-                <li>• Node.js, Express.js</li>
-                <li>• Python, Django, FastAPI</li>
-                <li>• RESTful APIs, GraphQL</li>
+                • React.js, Next.js, TypeScript
+                • HTML5, CSS3, Tailwind CSS
+                • JavaScript (ES6+), Redux
+                • Responsive Web Design
               </ul>
             </div>
             <div className="skill-category">
-              <h3>→ Database & Tools:</h3>
+              → Backend & DevOps:
               <ul>
-                <li>• MongoDB, PostgreSQL, MySQL</li>
-                <li>• Git, Docker, AWS</li>
-                <li>• Jest, Cypress, Webpack</li>
+                • Node.js, Express.js, Python
+                • Database Management (MySQL, PostgreSQL, MongoDB)
+                • Docker, Kubernetes, CI/CD
+                • Git, GitHub, Version Control
+                • Automation & Scripting
               </ul>
             </div>
           </div>
@@ -73,23 +76,15 @@ const App = () => {
           <h2 className="section-title"># WORK EXPERIENCE</h2>
           <div className="content">
             <div className="job">
-              <h3>→ Senior Full Stack Developer</h3>
-              <p className="company">Tech Solutions Inc. | 2022 - Present</p>
+              → Systems Administrator & Technical Specialist
+              <p className="company">Microsoft UHRS | 2023 - Present</p>
               <ul>
-                <li>• Led development of scalable web applications using React and Node.js</li>
-                <li>• Improved application performance by 40% through code optimization</li>
-                <li>• Mentored junior developers and conducted code reviews</li>
-                <li>• Implemented CI/CD pipelines reducing deployment time by 60%</li>
-              </ul>
-            </div>
-            <div className="job">
-              <h3>→ Frontend Developer</h3>
-              <p className="company">Digital Agency XYZ | 2020 - 2022</p>
-              <ul>
-                <li>• Developed responsive web applications for 20+ clients</li>
-                <li>• Collaborated with design teams to implement pixel-perfect UIs</li>
-                <li>• Integrated third-party APIs and payment gateways</li>
-                <li>• Maintained 99% client satisfaction rate</li>
+                • Managed and maintained critical system infrastructure ensuring 99.9% uptime
+                • Implemented automated monitoring solutions reducing incident response time by 50%
+                • Performed system administration tasks including user management, security patches, and backup procedures
+                • Troubleshot complex technical issues and provided tier-2 technical support
+                • Collaborated with development teams to optimize system performance and scalability
+                • Documented system processes and created technical guidelines for team members
               </ul>
             </div>
           </div>
@@ -104,33 +99,33 @@ const App = () => {
           <h2 className="section-title"># PROJECTS</h2>
           <div className="content">
             <div className="project">
-              <h3>→ E-Commerce Platform</h3>
-              <p className="tech-stack">[React, Node.js, MongoDB, Stripe API]</p>
+              → Infrastructure Monitoring Dashboard
+              <p className="tech-stack">[React, Node.js, MongoDB, Docker]</p>
               <ul>
-                <li>• Full-featured online shopping platform with cart and checkout</li>
-                <li>• Admin dashboard for inventory and order management</li>
-                <li>• Integrated payment processing and email notifications</li>
-                <li>• Deployed on AWS with auto-scaling capabilities</li>
+                • Built comprehensive system monitoring dashboard for infrastructure management
+                • Implemented real-time alerting system for critical system events
+                • Created automated reporting tools for system performance metrics
+                • Deployed using Docker containers with load balancing
               </ul>
             </div>
             <div className="project">
-              <h3>→ Task Management App</h3>
-              <p className="tech-stack">[Next.js, TypeScript, Prisma, PostgreSQL]</p>
+              → Automated Backup & Recovery System
+              <p className="tech-stack">[Python, Bash, AWS S3, Cron]</p>
               <ul>
-                <li>• Real-time collaborative task management with drag & drop</li>
-                <li>• User authentication and role-based permissions</li>
-                <li>• Dark/light theme support and responsive design</li>
-                <li>• RESTful API with comprehensive testing suite</li>
+                • Developed automated backup solution for critical business data
+                • Implemented disaster recovery procedures with RTO/RPO compliance
+                • Created monitoring scripts for backup validation and alerts
+                • Reduced manual backup tasks by 90% through automation
               </ul>
             </div>
             <div className="project">
-              <h3>→ Weather Analytics Dashboard</h3>
-              <p className="tech-stack">[React, D3.js, Python, FastAPI]</p>
+              → Portfolio Website
+              <p className="tech-stack">[React, TypeScript, Tailwind CSS, Vercel]</p>
               <ul>
-                <li>• Interactive data visualization for weather patterns</li>
-                <li>• Real-time data fetching from weather APIs</li>
-                <li>• Machine learning predictions for weather forecasting</li>
-                <li>• Responsive charts and graphs with filtering options</li>
+                • Designed and developed terminal-themed portfolio website
+                • Implemented responsive design with ATS-friendly content structure
+                • Optimized for performance and SEO best practices
+                • Deployed with CI/CD pipeline for automatic updates
               </ul>
             </div>
           </div>
@@ -145,13 +140,13 @@ const App = () => {
           <h2 className="section-title"># EDUCATION</h2>
           <div className="content">
             <div className="education">
-              <h3>→ Bachelor of Computer Science</h3>
-              <p className="institution">University of Technology | 2016 - 2020</p>
+              → Bachelor of Technology (B.Tech)
+              <p className="institution">Computer Science Engineering | 2020 - 2024</p>
               <ul>
-                <li>• Graduated with First Class Honors (GPA: 3.8/4.0)</li>
-                <li>• Specialized in Software Engineering and Database Systems</li>
-                <li>• President of Programming Club (2018-2020)</li>
-                <li>• Published research paper on "Optimizing Database Queries"</li>
+                • CGPA: 7.0/10.0
+                • Specialized in Computer Science and Engineering
+                • Relevant Coursework: Operating Systems, Database Management, Network Security
+                • Completed capstone project on "System Performance Optimization"
               </ul>
             </div>
           </div>
@@ -166,12 +161,12 @@ const App = () => {
           <h2 className="section-title"># ADDITIONAL ACTIVITIES</h2>
           <div className="content">
             <ul>
-              <li>• Open Source Contributor - Contributed to 15+ GitHub projects</li>
-              <li>• Technical Blogger - 50+ articles on Medium and Dev.to</li>
-              <li>• Speaker at local developer meetups and conferences</li>
-              <li>• Volunteer coding instructor for underprivileged youth</li>
-              <li>• AWS Certified Solutions Architect (2023)</li>
-              <li>• Google Cloud Professional Developer (2022)</li>
+              • Hackathon Participant - Participated in multiple technical hackathons focusing on system optimization
+              • Freelance Developer - Worked on various web development and system administration projects
+              • Technical Blogger - Published articles on system administration and development best practices on Hashnode
+              • Open Source Contributor - Active contributor to system administration and DevOps tools
+              • Continuous Learning - Staying updated with latest technologies in cloud computing and automation
+              • Technical Mentoring - Helping junior developers and system administrators in their career growth
             </ul>
           </div>
         </section>
@@ -186,12 +181,20 @@ const App = () => {
           <div className="content">
             <div className="contact-grid">
               <div className="contact-item">
+                <span className="label">Name:</span>
+                <span className="value">Ranadheer Pothula</span>
+              </div>
+              <div className="contact-item">
                 <span className="label">Email:</span>
-                <span className="value">ranadheer.pothula@email.com</span>
+                <span className="value">ranadheerpothula@gmail.com</span>
+              </div>
+              <div className="contact-item">
+                <span className="label">Phone:</span>
+                <span className="value">+91-8886893647</span>
               </div>
               <div className="contact-item">
                 <span className="label">Location:</span>
-                <span className="value">Hyderabad, India</span>
+                <span className="value">India</span>
               </div>
               <div className="contact-item">
                 <span className="label">GitHub:</span>
@@ -200,6 +203,10 @@ const App = () => {
               <div className="contact-item">
                 <span className="label">LinkedIn:</span>
                 <span className="value">linkedin.com/in/ranadheer-pothula</span>
+              </div>
+              <div className="contact-item">
+                <span className="label">Hashnode:</span>
+                <span className="value">ranadheer.hashnode.dev</span>
               </div>
               <div className="contact-item">
                 <span className="label">Portfolio:</span>
