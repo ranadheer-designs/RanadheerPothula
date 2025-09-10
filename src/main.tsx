@@ -1,8 +1,107 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 
 const App = () => {
+  const [currentCommand, setCurrentCommand] = useState('');
+  const [commandHistory, setCommandHistory] = useState<string[]>([]);
+  const [currentSection, setCurrentSection] = useState('welcome');
+  const [typewriterText, setTypewriterText] = useState('');
+  const [showCursor, setShowCursor] = useState(true);
+
+  // Available commands
+  const availableCommands = ['about', 'skills', 'experience', 'projects', 'education', 'contact', 'help', 'clear'];
+
+  // Typewriter effect
+  const typeWriter = (text: string, callback?: () => void) => {
+    let i = 0;
+    setTypewriterText('');
+    const timer = setInterval(() => {
+      if (i < text.length) {
+        setTypewriterText(prev => prev + text.charAt(i));
+        i++;
+      } else {
+        clearInterval(timer);
+        if (callback) callback();
+      }
+    }, 50);
+  };
+
+  // Handle command execution
+  const executeCommand = (command: string) => {
+    const cmd = command.toLowerCase().trim();
+    setCommandHistory(prev => [...prev, `ranadheer@portfolio:~$ ${command}`]);
+    
+    if (availableCommands.includes(cmd)) {
+      setCurrentSection(cmd);
+      if (cmd !== 'clear' && cmd !== 'help') {
+        typeWriter(getSectionContent(cmd));
+      }
+    } else if (cmd === '') {
+      // Do nothing for empty command
+    } else {
+      setCommandHistory(prev => [...prev, `Command not found: ${command}. Type 'help' for available commands.`]);
+    }
+    setCurrentCommand('');
+  };
+
+  // Get section content
+  const getSectionContent = (section: string): string => {
+    switch (section) {
+      case 'about':
+        return 'Experienced Systems Administrator and QA Analyst with strong expertise in system administration, cloud technologies, and modern web development. Currently working as Microsoft UHRS QA Analyst with focus on system reliability, performance optimization, and technical problem-solving. Passionate about building efficient, scalable solutions and maintaining robust infrastructure.';
+      case 'skills':
+        return 'System Administration: Linux/Unix, Windows Server, Network Configuration, Cloud Infrastructure (AWS, Azure)\nFrontend: React.js, Next.js, TypeScript, HTML5, CSS3, Tailwind CSS\nBackend & DevOps: Node.js, Python, Docker, Kubernetes, CI/CD, MongoDB, PostgreSQL\nTools: Git, GitHub, System Monitoring, Automation & Scripting';
+      case 'experience':
+        return 'Microsoft UHRS QA Analyst | 2023 - Present\n• Quality assurance and system reliability testing\n• Performance optimization and technical problem-solving\n• System administration and maintenance tasks\n• Collaboration with development teams for scalability improvements';
+      case 'projects':
+        return 'Infrastructure Monitoring Dashboard [React, Node.js, MongoDB, Docker]\n• Real-time system monitoring and alerting\n• Automated reporting for performance metrics\n\nAutomated Backup & Recovery System [Python, Bash, AWS S3]\n• Disaster recovery procedures with RTO/RPO compliance\n• 90% reduction in manual backup tasks\n\nInteractive Terminal Portfolio [React, TypeScript, Tailwind CSS]\n• Terminal-themed responsive design\n• Interactive command-based navigation';
+      case 'education':
+        return 'Bachelor of Technology (B.Tech) - Computer Science Engineering\n2020 - 2024 | CGPA: 7.0/10.0\n\nRelevant Coursework: Operating Systems, Database Management, Network Security\nCapstone Project: System Performance Optimization';
+      case 'contact':
+        return 'Name: Ranadheer Pothula\nEmail: ranadheerpothula@gmail.com\nPhone: +91-8886893647\nLocation: India\n\nLinks:\n• GitHub: github.com/ranadheer-designs\n• LinkedIn: linkedin.com/in/ranadheer-pothula\n• Portfolio: ranadheer-pothula.vercel.app\n• Blog: ranadheer.hashnode.dev';
+      default:
+        return '';
+    }
+  };
+
+  // Handle key press
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') {
+      executeCommand(currentCommand);
+    }
+  };
+
+  // Clear command
+  const clearTerminal = () => {
+    setCommandHistory([]);
+    setCurrentSection('welcome');
+    setTypewriterText('');
+  };
+
+  // Help command
+  const showHelp = () => {
+    const helpText = `Available commands:\n${availableCommands.map(cmd => `  ${cmd}`).join('\n')}\n\nClick on command buttons or type commands directly!`;
+    setCommandHistory(prev => [...prev, helpText]);
+  };
+
+  // Execute command when section changes
+  useEffect(() => {
+    if (currentSection === 'clear') {
+      clearTerminal();
+    } else if (currentSection === 'help') {
+      showHelp();
+    }
+  }, [currentSection]);
+
+  // Cursor blinking effect
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setShowCursor(prev => !prev);
+    }, 530);
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <div className="terminal">
       <div className="terminal-header">
@@ -15,210 +114,78 @@ const App = () => {
       </div>
       
       <div className="terminal-body">
-        <div className="prompt-line">
-          <span className="prompt">ranadheer@portfolio:~$</span>
-          <span className="command">cat about.txt</span>
+        <div className="welcome-section">
+          <pre className="ascii-art">
+██████╗  █████╗ ███╗   ██╗ █████╗ ██████╗ ██╗  ██╗███████╗███████╗██████╗ 
+██╔══██╗██╔══██╗████╗  ██║██╔══██╗██╔══██╗██║  ██║██╔════╝██╔════╝██╔══██╗
+██████╔╝███████║██╔██╗ ██║███████║██║  ██║███████║█████╗  █████╗  ██████╔╝
+██╔══██╗██╔══██║██║╚██╗██║██╔══██║██║  ██║██╔══██║██╔══╝  ██╔══╝  ██╔══██╗
+██║  ██║██║  ██║██║ ╚████║██║  ██║██████╔╝██║  ██║███████╗███████╗██║  ██║
+╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝╚═════╝ ╚═╝  ╚═╝╚══════╝╚══════╝╚═╝  ╚═╝
+          </pre>
+          <p className="welcome-text">Welcome to Ranadheer's Interactive Terminal Portfolio!</p>
+          <p className="welcome-subtitle">Systems Administrator | Microsoft UHRS QA Analyst | Full Stack Developer</p>
+          <p className="help-text">Type 'help' or click on the command buttons below to explore</p>
         </div>
-        
-        <section className="section">
-          <h2 className="section-title"># PROFESSIONAL SUMMARY</h2>
-          <div className="content">
-            <p>Experienced Systems Administrator and Full Stack Developer with strong expertise in system administration, cloud technologies, and modern web development. Proven track record at Microsoft UHRS with focus on system reliability, performance optimization, and technical problem-solving. Passionate about building efficient, scalable solutions and maintaining robust infrastructure.</p>
-          </div>
-        </section>
-        
-        <div className="prompt-line">
-          <span className="prompt">ranadheer@portfolio:~$</span>
-          <span className="command">ls -la skills/</span>
+
+        {/* Command Buttons */}
+        <div className="command-buttons">
+          {availableCommands.filter(cmd => cmd !== 'clear' && cmd !== 'help').map(cmd => (
+            <button 
+              key={cmd} 
+              className="cmd-btn" 
+              onClick={() => executeCommand(cmd)}
+            >
+              {cmd}
+            </button>
+          ))}
         </div>
-        
-        <section className="section">
-          <h2 className="section-title"># CORE SKILLS</h2>
-          <div className="content">
-            <div className="skill-category">
-              → System Administration:
-              <ul>
-                • Linux/Unix System Administration
-                • Windows Server Management
-                • Network Configuration & Troubleshooting
-                • System Monitoring & Performance Tuning
-                • Cloud Infrastructure (AWS, Azure)
-              </ul>
+
+        {/* Command History */}
+        <div className="command-history">
+          {commandHistory.map((line, index) => (
+            <div key={index} className="history-line">
+              <pre>{line}</pre>
             </div>
-            <div className="skill-category">
-              → Frontend Development:
-              <ul>
-                • React.js, Next.js, TypeScript
-                • HTML5, CSS3, Tailwind CSS
-                • JavaScript (ES6+), Redux
-                • Responsive Web Design
-              </ul>
-            </div>
-            <div className="skill-category">
-              → Backend & DevOps:
-              <ul>
-                • Node.js, Express.js, Python
-                • Database Management (MySQL, PostgreSQL, MongoDB)
-                • Docker, Kubernetes, CI/CD
-                • Git, GitHub, Version Control
-                • Automation & Scripting
-              </ul>
-            </div>
-          </div>
-        </section>
-        
-        <div className="prompt-line">
-          <span className="prompt">ranadheer@portfolio:~$</span>
-          <span className="command">cat work_experience.log</span>
+          ))}
         </div>
-        
-        <section className="section">
-          <h2 className="section-title"># WORK EXPERIENCE</h2>
-          <div className="content">
-            <div className="job">
-              → Systems Administrator & Technical Specialist
-              <p className="company">Microsoft UHRS | 2023 - Present</p>
-              <ul>
-                • Managed and maintained critical system infrastructure ensuring 99.9% uptime
-                • Implemented automated monitoring solutions reducing incident response time by 50%
-                • Performed system administration tasks including user management, security patches, and backup procedures
-                • Troubleshot complex technical issues and provided tier-2 technical support
-                • Collaborated with development teams to optimize system performance and scalability
-                • Documented system processes and created technical guidelines for team members
-              </ul>
-            </div>
+
+        {/* Current Output */}
+        {typewriterText && (
+          <div className="output-section">
+            <pre className="typewriter">{typewriterText}</pre>
           </div>
-        </section>
-        
-        <div className="prompt-line">
+        )}
+
+        {/* Input Line */}
+        <div className="input-line">
           <span className="prompt">ranadheer@portfolio:~$</span>
-          <span className="command">find ./projects -name "*.project"</span>
+          <input
+            type="text"
+            value={currentCommand}
+            onChange={(e) => setCurrentCommand(e.target.value)}
+            onKeyPress={handleKeyPress}
+            className="command-input"
+            placeholder="Type a command..."
+            autoFocus
+          />
+          <span className={`cursor ${showCursor ? 'visible' : 'hidden'}`}>_</span>
         </div>
-        
-        <section className="section">
-          <h2 className="section-title"># PROJECTS</h2>
-          <div className="content">
-            <div className="project">
-              → Infrastructure Monitoring Dashboard
-              <p className="tech-stack">[React, Node.js, MongoDB, Docker]</p>
-              <ul>
-                • Built comprehensive system monitoring dashboard for infrastructure management
-                • Implemented real-time alerting system for critical system events
-                • Created automated reporting tools for system performance metrics
-                • Deployed using Docker containers with load balancing
-              </ul>
-            </div>
-            <div className="project">
-              → Automated Backup & Recovery System
-              <p className="tech-stack">[Python, Bash, AWS S3, Cron]</p>
-              <ul>
-                • Developed automated backup solution for critical business data
-                • Implemented disaster recovery procedures with RTO/RPO compliance
-                • Created monitoring scripts for backup validation and alerts
-                • Reduced manual backup tasks by 90% through automation
-              </ul>
-            </div>
-            <div className="project">
-              → Portfolio Website
-              <p className="tech-stack">[React, TypeScript, Tailwind CSS, Vercel]</p>
-              <ul>
-                • Designed and developed terminal-themed portfolio website
-                • Implemented responsive design with ATS-friendly content structure
-                • Optimized for performance and SEO best practices
-                • Deployed with CI/CD pipeline for automatic updates
-              </ul>
-            </div>
-          </div>
-        </section>
-        
-        <div className="prompt-line">
-          <span className="prompt">ranadheer@portfolio:~$</span>
-          <span className="command">cat education.txt</span>
-        </div>
-        
-        <section className="section">
-          <h2 className="section-title"># EDUCATION</h2>
-          <div className="content">
-            <div className="education">
-              → Bachelor of Technology (B.Tech)
-              <p className="institution">Computer Science Engineering | 2020 - 2024</p>
-              <ul>
-                • CGPA: 7.0/10.0
-                • Specialized in Computer Science and Engineering
-                • Relevant Coursework: Operating Systems, Database Management, Network Security
-                • Completed capstone project on "System Performance Optimization"
-              </ul>
-            </div>
-          </div>
-        </section>
-        
-        <div className="prompt-line">
-          <span className="prompt">ranadheer@portfolio:~$</span>
-          <span className="command">ls activities/</span>
-        </div>
-        
-        <section className="section">
-          <h2 className="section-title"># ADDITIONAL ACTIVITIES</h2>
-          <div className="content">
-            <ul>
-              • Hackathon Participant - Participated in multiple technical hackathons focusing on system optimization
-              • Freelance Developer - Worked on various web development and system administration projects
-              • Technical Blogger - Published articles on system administration and development best practices on Hashnode
-              • Open Source Contributor - Active contributor to system administration and DevOps tools
-              • Continuous Learning - Staying updated with latest technologies in cloud computing and automation
-              • Technical Mentoring - Helping junior developers and system administrators in their career growth
-            </ul>
-          </div>
-        </section>
-        
-        <div className="prompt-line">
-          <span className="prompt">ranadheer@portfolio:~$</span>
-          <span className="command">cat contact.txt</span>
-        </div>
-        
-        <section className="section contact">
-          <h2 className="section-title"># CONTACT INFORMATION</h2>
-          <div className="content">
-            <div className="contact-grid">
-              <div className="contact-item">
-                <span className="label">Name:</span>
-                <span className="value">Ranadheer Pothula</span>
-              </div>
-              <div className="contact-item">
-                <span className="label">Email:</span>
-                <span className="value">ranadheerpothula@gmail.com</span>
-              </div>
-              <div className="contact-item">
-                <span className="label">Phone:</span>
-                <span className="value">+91-8886893647</span>
-              </div>
-              <div className="contact-item">
-                <span className="label">Location:</span>
-                <span className="value">India</span>
-              </div>
-              <div className="contact-item">
-                <span className="label">GitHub:</span>
-                <span className="value">github.com/ranadheer-designs</span>
-              </div>
-              <div className="contact-item">
-                <span className="label">LinkedIn:</span>
-                <span className="value">linkedin.com/in/ranadheer-pothula</span>
-              </div>
-              <div className="contact-item">
-                <span className="label">Hashnode:</span>
-                <span className="value">ranadheer.hashnode.dev</span>
-              </div>
-              <div className="contact-item">
-                <span className="label">Portfolio:</span>
-                <span className="value">ranadheer-pothula.vercel.app</span>
-              </div>
-            </div>
-          </div>
-        </section>
-        
-        <div className="prompt-line blinking">
-          <span className="prompt">ranadheer@portfolio:~$</span>
-          <span className="cursor">_</span>
+
+        {/* Social Links */}
+        <div className="social-links">
+          <a href="https://github.com/ranadheer-designs" target="_blank" rel="noopener noreferrer" className="social-link">
+            <span className="icon">📧</span> GitHub
+          </a>
+          <a href="https://linkedin.com/in/ranadheer-pothula" target="_blank" rel="noopener noreferrer" className="social-link">
+            <span className="icon">💼</span> LinkedIn
+          </a>
+          <a href="mailto:ranadheerpothula@gmail.com" className="social-link">
+            <span className="icon">✉️</span> Email
+          </a>
+          <a href="https://ranadheer.hashnode.dev" target="_blank" rel="noopener noreferrer" className="social-link">
+            <span className="icon">📝</span> Blog
+          </a>
         </div>
       </div>
     </div>
